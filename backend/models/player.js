@@ -15,6 +15,10 @@ const PlayerSchema = new Mongoose.Schema({
   playerImage: {
     type: String,
     default: 'placeholder-image.jpg'
+  },
+  game: {
+    type: Mongoose.Schema.Types.ObjectId,
+    ref: 'Game'
   }
 
 })

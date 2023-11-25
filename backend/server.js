@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt')
 
 const authRoute = require('./routes/auth')
 const crudUsers = require('./routes/user')
+const crudPlayers = require('./routes/player')
 
 const app = express()
 
@@ -69,6 +70,7 @@ process.on('unhandledRejection', (err) => {
 // Routes
 app.use('/api/auth', authRoute)
 app.use('/api/', crudUsers)
+app.use('/api/', crudPlayers)
 
 // Gestion des erreurs centralisée
 app.use((err, req, res, next) => {
