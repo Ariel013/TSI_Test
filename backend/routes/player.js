@@ -1,3 +1,4 @@
+/* This code is setting up a router for handling HTTP requests related to players in a web application. */
 const express = require('express')
 const { getPlayers, addPlayer, updatePlayer, getOnePlayer, deletePlayer } = require('../controllers/player')
 const router = express.Router()

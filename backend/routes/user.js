@@ -1,3 +1,5 @@
+/* This code is defining a router for handling different routes related to user management in an
+Express.js application. */
 const express = require('express')
 const { getUsers, deactivate, updateUser, getOneUser, deleteuser, makeAdmin } = require('../controllers/user')
 const router = express.Router()
