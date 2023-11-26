@@ -66,7 +66,7 @@ exports.deactivate = async (req, res) => {
 based on the provided user ID. */
 exports.getOneUser = async (req, res) => {
   try {
-    const userId = req.parmas.id
+    const userId = req.params.id
     const user = await User.findOne({ _id: userId })
     if (!user) {
       return res.status(404).json({ error: 'Utilisateur non trouvé' })
