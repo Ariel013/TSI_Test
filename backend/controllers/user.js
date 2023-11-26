@@ -153,8 +153,10 @@ exports.makeAdmin = async (req, res) => {
 
     // Faire Admin
     if (user.role === 'admin') {
-      return res.status(400).json({ error: 'Cet utilisateur est déjà adminin' })
-    } else {
+      user.role = 'user'
+      await user.save()
+      res.status(200).json({ message: 'Administrateur est maintenant un utilisateur simple' })
+    } else if (user.role === 'user') {
       user.role = 'admin'
       await user.save()
       res.status(200).json({ message: 'Utilisateur est maintenant un administrateur' })
