@@ -1,0 +1,29 @@
+.playerImage{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+.info{
+    display: flex;
+    justify-content: center;
+     
+}
+.image{
+    display: flex;
+    justify-content: center;
+     margin-bottom: 20px;
+}
+
+.image img{
+    height: 200px;
+     
+}
+.spacer{
+    width: 20px;
+}
+
+.search{
+    display: flex;
+    justify-content: center;
+}
