@@ -5,5 +5,5 @@ const router = express.Router()
 
 router.route('/game/:id').put(updateGame).delete(deleteGame)
 router.route('/game').get(getGames).post(addGame)
-router.route('/game/:name').get(getGamebyPlayer)
+router.route('/game/:name').post(getGamebyPlayer)
 module.exports = router
