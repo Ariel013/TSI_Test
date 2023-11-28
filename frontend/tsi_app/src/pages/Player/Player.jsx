@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Player.css';
-import player from "../asset/lebron.jpeg"
+import player from "../../asset/lebron.jpeg"
 
 function Player() {
 
