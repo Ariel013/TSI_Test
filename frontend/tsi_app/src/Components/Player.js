@@ -47,11 +47,9 @@ function Player() {
     };
 
     return (
-        <><div className="w-[80%] mx-auto">
-            <div className="m-20">
-
-            </div>
-            <div className="w-full flex p-1 mb-4">
+        <><div className="w-[80%] mx-auto h-screen flex flex-col justify-center py-5">
+            
+            <div className="w-full flex p-1 mb-3">
                 <div className="relative w-[50%]">
                     <input type="text" className="w-full  bg-white py-2 pl-10 pr-4 rounded-lg focus:outline-none border-2 border-gray-500 focus:border-black transition-colors duration-300" placeholder="Search..." value={searchTerm} onChange={handleSearch} onKeyDown={handleKeyPress} />
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -62,20 +60,20 @@ function Player() {
                 </div>
             </div>
             {/* component */}
-            <div className="bg-gray-100 flex items-center justify-center lg:h-screen py-16">
+            <div className="bg-gray-100 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full h-full gap-10 py-5 px-5 overflow-y-scroll">
                 {data.map((game) => (
-                    <div className="w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 bg-white p-6 rounded-lg shadow-sm">
+                    <div className="w-full bg-white p-6 rounded-lg shadow-sm">
                         <div className="w-full flex justify-center p-1 mb-4">
                             <div className="relative w-full playerImage">
                                 <div className="image">
                                     <img src={player} alt="" />
                                 </div>
                                 <div className="relative w-full info">
-                                    <h2 className="text-xl font-semibold mb-4">{game.player.playerName}</h2>
+                                    <h2 className="text-xl font-semibold mb-4">{game.player?.playerName}</h2>
                                     <div className="spacer">
 
                                     </div>
-                                    <h2 className="text-xl font-semibold mb-4"> {game.player.jerseyNumber}</h2>
+                                    <h2 className="text-xl font-semibold mb-4"> {game.player?.jerseyNumber}</h2>
                                 </div>
                             </div>
                         </div>
