@@ -17,7 +17,7 @@ const loginFields=[
         type:"password",
         autoComplete:"current-password",
         isRequired:true,
-        placeholder:"Password"   
+        placeholder:"Password"
     }
 ]
 
