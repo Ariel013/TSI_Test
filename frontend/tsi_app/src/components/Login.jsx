@@ -1,49 +1,61 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { loginFields } from "../constants/formFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
+import axios from "axios";
 
-const fields=loginFields;
+const fields = loginFields;
 let fieldsState = {};
-fields.forEach(field=>fieldsState[field.id]='');
+fields.forEach(field => fieldsState[field.id] = '');
 
-export default function Login(){
-    const [loginState,setLoginState]=useState(fieldsState);
+export default function Login() {
+    const [loginState, setLoginState] = useState(fieldsState);
+    const navigate = useNavigate();
 
-    const handleChange=(e)=>{
-        setLoginState({...loginState,[e.target.id]:e.target.value})
+    const handleChange = (e) => {
+        setLoginState({ ...loginState, [e.target.id]: e.target.value })
     }
 
-    const handleSubmit=(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        authenticateUser();
+        const success = authenticateUser();
+
+        if (success) {
+            navigate('/index');
+        } else {
+            console.error('Echec de l\'authentification');
+        }
+
     }
 
     //Handle Login API Integration here
-    const authenticateUser = () =>{
+    const authenticateUser = async () => {
 
-        const endpoint = `http://localhost:5000/api/user`;
-        fetch(endpoint,
-            {
-                method: 'POST',
+        const api = `http://localhost:5000/api`;
+        try {
+            const resp = await axios.post(api + "/auth/login", loginState, {
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body:JSON.stringify(loginFields)
-            }).then(response=>response.json())
-            .then(data=>{
-                //API Success from Login API
-            })
-            .catch(error=>console.log(error))
+                }
+            });
 
+            console.log("success :", resp.data)
+            // Vérification de la réponse du backend
+            return resp.data.success === true;
+
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
     }
 
-    return(
+    return (
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-        <div className="-space-y-px">
-            {
-                fields.map(field=>
+            <div className="-space-y-px">
+                {
+                    fields.map(field =>
                         <Input
                             key={field.id}
                             handleChange={handleChange}
@@ -55,15 +67,15 @@ export default function Login(){
                             type={field.type}
                             isRequired={field.isRequired}
                             placeholder={field.placeholder}
-                    />
-                
-                )
-            }
-        </div>
+                        />
 
-        <FormExtra/>
-        <FormAction handleSubmit={handleSubmit} text="Login"/>
+                    )
+                }
+            </div>
 
-      </form>
+            <FormExtra />
+            <FormAction handleSubmit={handleSubmit} text="Login" />
+
+        </form>
     )
 }

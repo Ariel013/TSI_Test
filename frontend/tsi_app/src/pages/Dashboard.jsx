@@ -1,7 +1,12 @@
-import Sidebar from "../components/Sidebar";
+import React from "react";
+import DashboardLayout from "./Layouts/DashboardLayout";
 
-export default function Dashboard() {
+const Dashboard = () => {
     return (
-        <Sidebar/>
+        <DashboardLayout>
+
+        </DashboardLayout>
     )
 }
+
+export default Dashboard;

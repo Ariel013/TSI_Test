@@ -95,7 +95,7 @@ games from the database. It is an asynchronous function that takes in the reques
 response (`res`) objects as parameters. */
 exports.getGames = async (req, res) => {
   try {
-    const games = await Game.find()
+    const games = await Game.find().populate('player')
     return res.status(200).json(games)
   } catch (error) {
     console.error('Erreur lors de la récupération des matchs', error)

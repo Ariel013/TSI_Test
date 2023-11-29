@@ -1,17 +1,18 @@
 import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react"
 import { useContext, createContext, useState } from "react"
+import { Link, useNavigate, useNavigation } from "react-router-dom"
 
-const SidebarContext = createContext()
+export const SidebarContext = createContext()
 
 export default function Sidebar({ children }) {
   const [expanded, setExpanded] = useState(true)
   
   return (
     <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-white border-r shadow-sm">
+      <nav className={`h-full flex flex-col bg-white border-r shadow-sm w-fit`}>
         <div className="p-4 pb-2 flex justify-between items-center">
           <img
-            src="https://img.logoipsum.com/243.svg"
+            src="../logo.svg"
             className={`overflow-hidden transition-all ${
               expanded ? "w-32" : "w-0"
             }`}
@@ -54,10 +55,10 @@ export default function Sidebar({ children }) {
 }
 
 export function SidebarItem({ icon, text, active, alert }) {
-  const { expanded } = useContext(SidebarContext)
+  const { expanded } = useContext(SidebarContext);
   
   return (
-    <li
+    <Link to={"/"+text.toLowerCase()} 
       className={`
         relative flex items-center py-2 px-3 my-1
         font-medium rounded-md cursor-pointer
@@ -97,6 +98,6 @@ export function SidebarItem({ icon, text, active, alert }) {
           {text}
         </div>
       )}
-    </li>
+    </Link>
   )
 }
