@@ -45,8 +45,13 @@ Don't forget to look at the .env file to see how to set your environnements vari
 
 ### Routes
 / : Signup
+
 /index : Index page for seeing Players
+
 /sigin : Signin
+
 /users : Dashboard users
+
 /players : Dashboard players
+
 /games : Dashboard games
