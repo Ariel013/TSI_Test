@@ -15,7 +15,7 @@ export default function Players() {
         const fetchData = async () => {
             try {
             const token = localStorage.getItem('token');
-                const response = await axios.get(`${process.env.BACK_URL}/player`, 
+                const response = await axios.get(`${process.env.REACT_APP_BACK_URL}/player`, 
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ export default function Players() {
         setPlayerId(playerId);
 		setOpenModal(true);
 		try {
-			await axios.put(`${process.env.BACK_URL}/player/${playerId}`);
+			await axios.put(`${process.env.REACT_APP_BACK_URL}/player/${playerId}`);
 			console.log('Remove player with ID')
 		} catch (error) {
 			console.error('Error removing player:', error)
@@ -46,7 +46,7 @@ export default function Players() {
 
 	const handleRemove = async (playerId) => {
 		try {
-			await axios.delete(`${process.env.BACK_URL}/player/${playerId}`);
+			await axios.delete(`${process.env.REACT_APP_BACK_URL}/player/${playerId}`);
 			console.log('Remove player with ID')
 		} catch (error) {
 			console.error('Error removing player:', error)

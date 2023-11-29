@@ -11,8 +11,8 @@ exports.confirmationEmail = async (req, res) => {
       user.confirmation_token = null
       await user.save()
       // Rediriger l'utilisateur vers une page de confirmation réussie ou envoyez une réponse JSON A faire!!!!!!!!!!!!!!!!!!!!!!!
-      res.status(200).json({ message: 'Email utilisateur confirmé avec succès.' })
-    //   res.redirect(`${process.env.FRONT_URL}/login`)
+      // res.status(200).json({ message: 'Email utilisateur confirmé avec succès.' })
+      res.redirect(`${process.env.FRONT_URL}/signin`)
     } else {
       return res.status(400).json({ message: 'Jeton de confirmation invalide.' })
     }

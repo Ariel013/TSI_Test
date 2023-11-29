@@ -15,7 +15,7 @@ export default function Users() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get('${process.env.BACK_URL}/user');
+				const response = await axios.get(`${process.env.REACT_APP_BACK_URL}/user`);
 				setUserData(response.data.users);
 				setLoading(false);
 			} catch (error) {
@@ -39,7 +39,7 @@ export default function Users() {
 
 	const handleRemove = async (userId) => {
 		try {
-			await axios.delete(`${process.env.BACK_URL}/user/${userId}`);
+			await axios.delete(`${process.env.REACT_APP_BACK_URL}/user/${userId}`);
 			console.log('Remove user with ID')
 		} catch (error) {
 			console.error('Error removing user:', error)

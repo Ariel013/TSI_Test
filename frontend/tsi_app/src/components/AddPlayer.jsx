@@ -36,7 +36,7 @@ export default function Component() {
             // formData.append('imageURL', imageURL);
             const token = localStorage.getItem('token');
 
-            const response = await axios.post(`${process.env.BACK_URL}/player`, {
+            const response = await axios.post(`${process.env.REACT_APP_BACK_URL}/player`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,

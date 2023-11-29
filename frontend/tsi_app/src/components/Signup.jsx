@@ -32,7 +32,7 @@ export default function Signup(){
   //handle Signup API Integration here
   const createAccount= async ()=>{
 
-    const api = `${process.env.BACK_URL}`;
+    const api = `${process.env.REACT_APP_BACK_URL}`;
     try {
       const token = localStorage.getItem('token');
       const resp = await axios.post(api + "/auth/register", signupState, {

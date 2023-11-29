@@ -19,7 +19,7 @@ export default function Component() {
         try {
             const token = localStorage.getItem('token');
 
-            const response = await axios.post(`${process.env.BACK_URL}/game`, {
+            const response = await axios.post(`${process.env.REACT_APP_BACK_URL}/game`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,

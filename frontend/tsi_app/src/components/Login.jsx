@@ -33,7 +33,7 @@ export default function Login() {
     //Handle Login API Integration here
     const authenticateUser = async () => {
 
-        const api = `${process.env.BACK_URL}`;
+        const api = `${process.env.REACT_APP_BACK_URL}`;
         try {
             const token = localStorage.getItem('token');
 

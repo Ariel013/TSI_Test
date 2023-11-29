@@ -20,7 +20,7 @@ export default function Edit({ openModal, setOpenModal, playerId, PlayerName, Pl
     const handleEditPlayer = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.put(`${process.env.BACK_URL}/player/${playerId}`, {
+            const response = await axios.put(`${process.env.REACT_APP_BACK_URL}/player/${playerId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
