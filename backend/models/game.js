@@ -18,6 +18,11 @@ const GameSchema = new Mongoose.Schema({
   },
   mistakes: {
     type: Number
+  },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+    required: true
   }
 
 })
