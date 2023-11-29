@@ -1,0 +1,4 @@
+FRONT_URL = Your Frontend url
+BACK_URL = Your Backendend url
+CLOUDINARY_URL = Cloudinanary api link for images storage
+CLOUDINARY_CLOUD_NAME = The name of the cloud provided by cloudinary

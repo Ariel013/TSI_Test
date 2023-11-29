@@ -14,7 +14,11 @@ const PlayerSchema = new Mongoose.Schema({
   },
   playerImage: {
     type: String,
-    default: 'placeholder-image.jpg'
+    default: 'lebron.jpeg'
+  },
+  game: {
+    type: Mongoose.Schema.Types.ObjectId,
+    ref: 'Game'
   }
 
 })

@@ -15,12 +15,6 @@ const UserSchema = new Mongoose.Schema({
     minlength: 8,
     required: true
   },
-  phone: {
-    type: Number,
-    unique: true,
-    maxlength: 8,
-    required: true
-  },
   role: {
     type: String,
     enum: ['admin', 'user'],

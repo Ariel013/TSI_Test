@@ -19,7 +19,7 @@ user. It takes in the request (`req`), response (`res`), and next middleware (`n
 exports.register = async (req, res, next) => {
   const user = req.body
 
-  if (!user.name || !user.email || !user.phone || !user.password) {
+  if (!user.name || !user.email || !user.password) {
     return res.status(400).json({ message: 'All fields are required to register' })
   } else if (!emailRegex.test(user.email)) {
     return res.status(400).json({ message: 'Invalid email format' })
