@@ -2,24 +2,25 @@ import { Button, Modal, Label, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import axios from 'axios';
 
-export default function Component() {
-    const [openModal, setOpenModal] = useState(false);
+export default function Edit({ openModal, setOpenModal, userId, username, useremail }) {
+    // const [openModal, setOpenModal] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // const [userId, setUserId] = useState(null);
 
     function onCloseModal() {
         setOpenModal(false);
         setName('');
         setEmail('');
         setPassword('');
+        // setUserId(null);
     }
 
-    const handleAddUser = async () => {
+    const handleEditUser = async () => {
         try {
             const token = localStorage.getItem('token');
-
-            const response = await axios.post(`${process.env.BACK_URL}/game`, {
+            const response = await axios.put(`${process.env.BACK_URL}/user/${userId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
@@ -29,27 +30,27 @@ export default function Component() {
                 password
             });
 
-            console.log('Game added succesfully:', response.data)
+            console.log('User updated succesfully:', response.data)
             onCloseModal()
         } catch (error) {
-            console.error('Error adding game:', error)
+            console.error('Error updating user:', error)
         }
     }
     return (
         <>
-            <Button className='text-blue-500 bg-white' onClick={() => setOpenModal(true)}>Add User</Button>
+            <Button className="hidden" onClick={() => setOpenModal(true)}>Edit User</Button>
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <Modal.Header />
                 <Modal.Body>
                     <div className="space-y-6">
-                        <h3 className="text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
+                        <h3 className="text-xl font-medium text-gray-900 dark:text-white">Update User Informations</h3>
                         <div>
                             <div className="mb-2 block">
                                 <Label htmlFor="name" value="name" />
                             </div>
                             <TextInput
                                 id="name"
-                                placeholder="Lebron"
+                                placeholder={username}
                                 value={name}
                                 onChange={(event) => setName(event.target.value)}
                                 required
@@ -61,7 +62,7 @@ export default function Component() {
                             </div>
                             <TextInput
                                 id="email"
-                                placeholder="name@gmail.com"
+                                placeholder={useremail}
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
                                 required
@@ -79,7 +80,7 @@ export default function Component() {
                             required />
                         </div>
                         <div className="w-full">
-                            <Button className='text-blue-500 bg-white' onClick={handleAddUser}>Add User</Button>
+                            <Button className='text-blue-500 bg-white' onClick={handleEditUser}>Update User</Button>
                         </div>
                     </div>
                 </Modal.Body>

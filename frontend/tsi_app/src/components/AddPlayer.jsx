@@ -1,7 +1,6 @@
 import { Button, Modal, Label, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import axios from 'axios';
-import { Form } from 'react-router-dom';
 
 export default function Component() {
     const [openModal, setOpenModal] = useState(false);
@@ -21,27 +20,47 @@ export default function Component() {
     const handleFile = (event) => {
         const file = event.target.files[0];
         setPlayerImage(file)
+        console.log(file)
     };
     const handleAddPlayer = async () => {
         try {
             const formData = new FormData();
-            formData.append('playerName', playerName);
-            formData.append('jerseyNumber', jerseyNumber);
-            formData.append('position', position);
             formData.append('playerImage', playerImage);
+            formData.append('upload_preset', process.env.CLOUDINARY_CLOUD_NAME)
 
-            const response = await axios.post('http://localhost:5000/api/player', formData, {
+            const uploadResponse = await axios.post(`${process.env.CLOUDINARY_URL}`, formData)
+
+
+            const playerImageURL = uploadResponse.data.secure_url;
+
+            // formData.append('imageURL', imageURL);
+            const token = localStorage.getItem('token');
+
+            const response = await axios.post(`${process.env.BACK_URL}/player`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                playerName,
+                jerseyNumber,
+                position,
+                playerImage: playerImageURL
+                // : formData.get('imageURL'),
+
+            }, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
-            });
 
+            });
             console.log('Player added succesfully:', response.data)
             onCloseModal()
         } catch (error) {
             console.error('Error adding player:', error)
         }
+
     }
+
     return (
         <>
             <Button className='text-blue-500 bg-white' onClick={() => setOpenModal(true)}>Add Player</Button>
@@ -88,7 +107,7 @@ export default function Component() {
                         </div>
                         <div>
                             <div className='mb-2 block'>
-                                <Label htmlFor='playerImage' value='Player Image' />
+                                <Label htmlFor='playerImage' value='playerImage' />
                             </div>
                             <input type='file' id='playerImage' onChange={handleFile} accept='image/*' required />
                         </div>

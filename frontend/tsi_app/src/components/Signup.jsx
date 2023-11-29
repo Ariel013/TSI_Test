@@ -32,12 +32,14 @@ export default function Signup(){
   //handle Signup API Integration here
   const createAccount= async ()=>{
 
-    const api = `http://localhost:5000/api`;
+    const api = `${process.env.BACK_URL}`;
     try {
+      const token = localStorage.getItem('token');
       const resp = await axios.post(api + "/auth/register", signupState, {
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+      }
       });
 
       console.log("success :", resp.data)

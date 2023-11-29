@@ -33,17 +33,25 @@ export default function Login() {
     //Handle Login API Integration here
     const authenticateUser = async () => {
 
-        const api = `http://localhost:5000/api`;
+        const api = `${process.env.BACK_URL}`;
         try {
+            const token = localStorage.getItem('token');
+
             const resp = await axios.post(api + "/auth/login", loginState, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
                 }
             });
 
             console.log("success :", resp.data)
             // Vérification de la réponse du backend
-            return resp.data.success === true;
+            if (resp.data.success === true) {
+                localStorage.setItem('token', resp.data.token);
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (error) {
             console.error(error);

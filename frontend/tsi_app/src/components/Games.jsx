@@ -9,7 +9,7 @@ export default function Games() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/game');
+                const response = await axios.get(`${process.env.BACK_URL}/game`);
                 setGameData(response.data);
                 console.log(response.data)
                 setLoading(false);
@@ -23,7 +23,7 @@ export default function Games() {
 
     const handleEdit = async (gameId) => {
 		try {
-			await axios.put(`http://localhost:5000/api/player/${gameId}`);
+			await axios.put(`${process.env.BACK_URL}/player/${gameId}`);
 			console.log('Remove game with ID')
 		} catch (error) {
 			console.error('Error removing game:', error)
@@ -32,7 +32,13 @@ export default function Games() {
 
 	const handleRemove = async (gameId) => {
 		try {
-			await axios.delete(`http://localhost:5000/api/player/${gameId}`);
+            const token = localStorage.getItem('token');
+			await axios.delete(`${process.env.BACK_URL}/player/${gameId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            });
 			console.log('Remove game with ID')
 		} catch (error) {
 			console.error('Error removing game:', error)

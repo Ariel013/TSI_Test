@@ -17,7 +17,12 @@ export default function Component() {
 
     const handleAddUser = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/register', {
+            const token = localStorage.getItem('token');
+            const response = await axios.post(`${process.env.BACK_URL}/auth/register`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
                 name,
                 email,
                 password

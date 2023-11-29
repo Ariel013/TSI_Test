@@ -2,15 +2,20 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import DashboardLayout from "../pages/Layouts/DashboardLayout";
 import Component from "./AddUser"
+import Edit from "./EditUser";
+
 
 export default function Users() {
 	const [userData, setUserData] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [userId, setUserId] = useState(null);
+	const [openModal, setOpenModal] = useState(false);
+
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get('http://localhost:5000/api/user');
+				const response = await axios.get('${process.env.BACK_URL}/user');
 				setUserData(response.data.users);
 				setLoading(false);
 			} catch (error) {
@@ -22,17 +27,19 @@ export default function Users() {
 	}, []);
 
 	const handleEdit = async (userId) => {
-		try {
-			await axios.put(`http://localhost:5000/api/user/${userId}`);
-			console.log('Remove user with ID')
-		} catch (error) {
-			console.error('Error removing user:', error)
-		}
+		setUserId(userId);
+		setOpenModal(true);
+		// try {
+		// 	await axios.put(`http://localhost:5000/api/user/${userId}`);
+		// 	console.log('Remove user with ID')
+		// } catch (error) {
+		// 	console.error('Error removing user:', error)
+		// }
 	}
 
 	const handleRemove = async (userId) => {
 		try {
-			await axios.delete(`http://localhost:5000/api/user/${userId}`);
+			await axios.delete(`${process.env.BACK_URL}/user/${userId}`);
 			console.log('Remove user with ID')
 		} catch (error) {
 			console.error('Error removing user:', error)
@@ -90,6 +97,7 @@ export default function Users() {
 											{user.role}
 										</td>
 										<td class=" flex px-6 py-4 text-right justify-between">
+											<Edit openModal={openModal} setOpenModal={setOpenModal} userId={userId} username={user.name} useremail={user.email}/>
 											<button onClick={() => handleEdit(user._id)} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
 											<button onClick={() => handleRemove(user._id)} class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
 

@@ -2,17 +2,28 @@ import { useState, useEffect } from "react";
 import Component from "./AddPlayer";
 import axios from 'axios';
 import DashboardLayout from "../pages/Layouts/DashboardLayout";
+import Edit from "./EditPlayer";
 
 export default function Players() {
     const [playerData, setPlayerData] = useState([]);
     const [loading, setLoading] = useState(true);
+	const [playerId, setPlayerId] = useState(null);
+	const [openModal, setOpenModal] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/player');
+            const token = localStorage.getItem('token');
+                const response = await axios.get(`${process.env.BACK_URL}/player`, 
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
                 setPlayerData(response.data);
-                console.log(response.data)
+                // console.log(response.data)
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -23,8 +34,10 @@ export default function Players() {
     }, []);
 
     const handleEdit = async (playerId) => {
+        setPlayerId(playerId);
+		setOpenModal(true);
 		try {
-			await axios.put(`http://localhost:5000/api/player/${playerId}`);
+			await axios.put(`${process.env.BACK_URL}/player/${playerId}`);
 			console.log('Remove player with ID')
 		} catch (error) {
 			console.error('Error removing player:', error)
@@ -33,7 +46,7 @@ export default function Players() {
 
 	const handleRemove = async (playerId) => {
 		try {
-			await axios.delete(`http://localhost:5000/api/player/${playerId}`);
+			await axios.delete(`${process.env.BACK_URL}/player/${playerId}`);
 			console.log('Remove player with ID')
 		} catch (error) {
 			console.error('Error removing player:', error)
@@ -91,6 +104,7 @@ export default function Players() {
                                             {player.position}
                                         </td>
                                         <td class=" flex px-6 py-4 text-right justify-between">
+											<Edit openModal={openModal} setOpenModal={setOpenModal} playerId={playerId} PlayerName={player.name} PlayerJersey={player.jerseyNumber} PlayerPosition={player.position}/>
                                             <button onClick={() => handleEdit(player._id)} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
                                             <button onClick={() => handleRemove(player._id)} class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
 

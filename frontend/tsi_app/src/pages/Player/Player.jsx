@@ -8,12 +8,15 @@ function Player() {
     const [searchTerm, setSearchTerm] = useState("")
 
     const apiGet = () => {
+        const token = localStorage.getItem('token');
+        // console.log(token)
+
         fetch(`http://localhost:5000/api/game/${searchTerm}`,
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    // Vous pouvez également inclure d'autres en-têtes si nécessaire
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({ playerName: searchTerm })
             }
