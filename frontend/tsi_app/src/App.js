@@ -20,7 +20,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/players" element={<Players />} />
           <Route path="/games" element={<Games />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/users" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );

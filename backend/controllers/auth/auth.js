@@ -150,7 +150,7 @@ exports.login = async (req, res, next) => {
         // Generation du token
         if (comparaison === true) {
           if (user.email_verified === true && user.is_active === true) {
-            const token = jwt.sign({ userId: user.id, role: user.role }, tokenKey, { expiresIn: '24h' })
+            const token = jwt.sign({ userId: user.id, role: user.role, userName: user.name, userEmail: user.email }, tokenKey, { expiresIn: '24h' })
             return res.status(200).json({
               message: 'Connexion réussie',
               token,
@@ -175,4 +175,26 @@ exports.login = async (req, res, next) => {
       return res.status(500).json({ message: 'user not catch', error: error.message })
     }
   }
+}
+
+// Get user Infos
+exports.getInfo = async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1]
+
+  if (!token) {
+    return res.status(401).json({ message: ' you are Unauthorized' })
+  }
+
+  // Verification du token et extraction des informations
+  jwt.verify(token, tokenKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: '  Unauthorized' })
+    }
+
+    // Extraction du role avec decoded et envoie
+    const userRole = decoded.role
+    const userName = decoded.userName
+    const userEmail = decoded.userEmail
+    res.json({ role: userRole, name: userName, email: userEmail })
+  })
 }

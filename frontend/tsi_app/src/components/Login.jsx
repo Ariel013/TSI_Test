@@ -20,7 +20,7 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const success = authenticateUser();
+        const success = await authenticateUser();
 
         if (success) {
             navigate('/index');
@@ -34,19 +34,21 @@ export default function Login() {
     const authenticateUser = async () => {
 
         const api = `${process.env.REACT_APP_BACK_URL}`;
+        // console.log(api)
         try {
-            const token = localStorage.getItem('token');
+            // const token = localStorage.getItem('token');
 
             const resp = await axios.post(api + "/auth/login", loginState, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
+                    // 'Authorization': `Bearer ${token}`,
                 }
             });
 
-            console.log("success :", resp.data)
+            console.log("success :", resp)
             // Vérification de la réponse du backend
-            if (resp.data.success === true) {
+            if (resp.status === 200) {
+                console.log("hello world")
                 localStorage.setItem('token', resp.data.token);
                 return true;
             } else {

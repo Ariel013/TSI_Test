@@ -15,7 +15,14 @@ export default function Users() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get(`${process.env.REACT_APP_BACK_URL}/user`);
+				const token = localStorage.getItem('token');
+				const response = await axios.get(`${process.env.REACT_APP_BACK_URL}/user`,
+				{
+					headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
+				});
 				setUserData(response.data.users);
 				setLoading(false);
 			} catch (error) {

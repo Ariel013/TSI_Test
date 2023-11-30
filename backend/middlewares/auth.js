@@ -75,13 +75,3 @@ exports.auth = async (req, res, next) => {
     return res.status(401).json({ message: 'unauthorized' })
   }
 }
-
-// middleware.js
-
-exports.isAdminMiddleware = (req, res, next) => {
-  if (req.user && req.user.role === 'admin') {
-    next()
-  } else {
-    res.redirect('/index')
-  }
-}

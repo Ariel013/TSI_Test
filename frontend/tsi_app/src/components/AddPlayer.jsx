@@ -20,7 +20,6 @@ export default function Component() {
     const handleFile = (event) => {
         const file = event.target.files[0];
         setPlayerImage(file)
-        console.log(file)
     };
     const handleAddPlayer = async () => {
         try {
@@ -53,7 +52,6 @@ export default function Component() {
                 },
 
             });
-            console.log('Player added succesfully:', response.data)
             onCloseModal()
         } catch (error) {
             console.error('Error adding player:', error)
