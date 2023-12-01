@@ -4,6 +4,6 @@ const { getPlayers, addPlayer, updatePlayer, getOnePlayer, deletePlayer } = requ
 const { verifyAdmin } = require('../middlewares/auth')
 const router = express.Router()
 
-router.route('/player').get(verifyAdmin, getPlayers).post(verifyAdmin, addPlayer)
-router.route('/player/:id').put(verifyAdmin, updatePlayer).get(verifyAdmin, getOnePlayer).delete(verifyAdmin, deletePlayer)
+router.route('/player').get(verifyAdmin, getPlayers).post(addPlayer)
+router.route('/player/:id').put(updatePlayer).get(verifyAdmin, getOnePlayer).delete(deletePlayer)
 module.exports = router

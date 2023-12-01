@@ -44,7 +44,6 @@ exports.updateGame = async (req, res) => {
 
   try {
     const gameToUpdate = await Game.findById(gameId)
-    console.log(gameToUpdate)
     if (!gameToUpdate) {
       return res.status(404).json({ error: 'Game not found' })
     }

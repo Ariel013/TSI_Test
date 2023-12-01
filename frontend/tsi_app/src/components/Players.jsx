@@ -23,7 +23,6 @@ export default function Players() {
                     }
                 });
                 setPlayerData(response.data);
-                // console.log(response.data)
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -38,7 +37,6 @@ export default function Players() {
 		setOpenModal(true);
 		try {
 			await axios.put(`${process.env.REACT_APP_BACK_URL}/player/${playerId}`);
-			console.log('Remove player with ID')
 		} catch (error) {
 			console.error('Error removing player:', error)
 		}
@@ -47,7 +45,6 @@ export default function Players() {
 	const handleRemove = async (playerId) => {
 		try {
 			await axios.delete(`${process.env.REACT_APP_BACK_URL}/player/${playerId}`);
-			console.log('Remove player with ID')
 		} catch (error) {
 			console.error('Error removing player:', error)
 		}

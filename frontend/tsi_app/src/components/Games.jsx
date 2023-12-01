@@ -18,7 +18,6 @@ export default function Games() {
                     }
                 });
                 setGameData(response.data);
-                console.log(response.data)
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -31,7 +30,6 @@ export default function Games() {
     const handleEdit = async (gameId) => {
 		try {
 			await axios.put(`${process.env.REACT_APP_BACK_URL}/player/${gameId}`);
-			console.log('Remove game with ID')
 		} catch (error) {
 			console.error('Error removing game:', error)
 		}
@@ -46,7 +44,6 @@ export default function Games() {
                     'Authorization': `Bearer ${token}`,
                 }
             });
-			console.log('Remove game with ID')
 		} catch (error) {
 			console.error('Error removing game:', error)
 		}

@@ -28,7 +28,6 @@ export default function Component() {
                 password
             });
 
-            console.log('User added succesfully:', response.data)
             onCloseModal()
         } catch (error) {
             console.error('Error adding user:', error)

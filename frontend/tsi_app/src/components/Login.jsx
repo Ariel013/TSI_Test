@@ -34,7 +34,6 @@ export default function Login() {
     const authenticateUser = async () => {
 
         const api = `${process.env.REACT_APP_BACK_URL}`;
-        // console.log(api)
         try {
             // const token = localStorage.getItem('token');
 
@@ -45,10 +44,8 @@ export default function Login() {
                 }
             });
 
-            console.log("success :", resp)
             // Vérification de la réponse du backend
             if (resp.status === 200) {
-                console.log("hello world")
                 localStorage.setItem('token', resp.data.token);
                 return true;
             } else {

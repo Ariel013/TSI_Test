@@ -19,7 +19,6 @@ export default function Signup(){
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-    console.log(signupState)
     const success = createAccount();
 
     if (success) {
@@ -42,7 +41,6 @@ export default function Signup(){
       }
       });
 
-      console.log("success :", resp.data)
       // Vérification de la réponse du backend
       return resp.data.success === true;
 

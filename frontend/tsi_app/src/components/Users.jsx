@@ -38,7 +38,6 @@ export default function Users() {
 		setOpenModal(true);
 		// try {
 		// 	await axios.put(`http://localhost:5000/api/user/${userId}`);
-		// 	console.log('Remove user with ID')
 		// } catch (error) {
 		// 	console.error('Error removing user:', error)
 		// }
@@ -47,7 +46,6 @@ export default function Users() {
 	const handleRemove = async (userId) => {
 		try {
 			await axios.delete(`${process.env.REACT_APP_BACK_URL}/user/${userId}`);
-			console.log('Remove user with ID')
 		} catch (error) {
 			console.error('Error removing user:', error)
 		}

@@ -29,7 +29,6 @@ export default function Component() {
                 password
             });
 
-            console.log('Game added succesfully:', response.data)
             onCloseModal()
         } catch (error) {
             console.error('Error adding game:', error)

@@ -30,7 +30,6 @@ export default function Edit({ openModal, setOpenModal, playerId, PlayerName, Pl
                 position
             });
 
-            console.log('Player updated succesfully:', response.data)
             onCloseModal()
         } catch (error) {
             console.error('Error updating player:', error)
@@ -43,10 +42,10 @@ export default function Edit({ openModal, setOpenModal, playerId, PlayerName, Pl
                 <Modal.Header />
                 <Modal.Body>
                     <div className="space-y-6">
-                        <h3 className="text-xl font-medium text-gray-900 dark:text-white">Update User Informations</h3>
+                        <h3 className="text-xl font-medium text-gray-900 dark:text-white">Update Player Informations</h3>
                         <div>
                             <div className="mb-2 block">
-                                <Label htmlFor="name" value="name" />
+                                <Label htmlFor="playerName" value="playerName" />
                             </div>
                             <TextInput
                                 id="playerName"
@@ -70,16 +69,18 @@ export default function Edit({ openModal, setOpenModal, playerId, PlayerName, Pl
                         </div>
                         <div>
                             <div className="mb-2 block">
-                                <Label htmlFor="password" value="password" />
+                                <Label htmlFor="position" value="position" />
                             </div>
-                            <TextInput 
-                            id="position"
-                            value={position} 
-                            onChange={(event) => setPosition(event.target.value)} 
-                            required />
+                            <TextInput
+                                id="position"
+                                placeholder={PlayerPosition}
+                                value={position}
+                                onChange={(event) => setPosition(event.target.value)}
+                                required
+                            />
                         </div>
                         <div className="w-full">
-                            <Button className='text-blue-500 bg-white' onClick={handleEditPlayer}>Update User</Button>
+                            <Button className='text-blue-500 bg-white' onClick={handleEditPlayer}>Update Player</Button>
                         </div>
                     </div>
                 </Modal.Body>

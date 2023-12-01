@@ -9,7 +9,6 @@ function Player() {
 
     const apiGet = () => {
         const token = localStorage.getItem('token');
-        // console.log(token)
 
         fetch(`http://localhost:5000/api/game/${searchTerm}`,
             {
@@ -25,7 +24,6 @@ function Player() {
             .then((res) => {
                 const dataArray = Array.isArray(res) ? res : [res];
                 setData(dataArray);
-                console.log(res);
             })
             .catch((error) => {
                 console.error("Erreur lors de la récupération des données de l'API:", error);

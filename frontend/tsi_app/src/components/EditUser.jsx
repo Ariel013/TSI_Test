@@ -30,7 +30,6 @@ export default function Edit({ openModal, setOpenModal, userId, username, userem
                 password
             });
 
-            console.log('User updated succesfully:', response.data)
             onCloseModal()
         } catch (error) {
             console.error('Error updating user:', error)

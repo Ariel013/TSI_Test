@@ -24,13 +24,13 @@ export default function Component() {
     const handleAddPlayer = async () => {
         try {
             const formData = new FormData();
-            formData.append('playerImage', playerImage);
-            formData.append('upload_preset', process.env.CLOUDINARY_CLOUD_NAME)
+            // formData.append('playerImage', playerImage);
+            // formData.append('upload_preset', process.env.CLOUDINARY_CLOUD_NAME)
 
-            const uploadResponse = await axios.post(`${process.env.CLOUDINARY_URL}`, formData)
+            // const uploadResponse = await axios.post(`${process.env.CLOUDINARY_URL}`, formData)
 
 
-            const playerImageURL = uploadResponse.data.secure_url;
+            // const playerImageURL = uploadResponse.data.secure_url;
 
             // formData.append('imageURL', imageURL);
             const token = localStorage.getItem('token');
@@ -43,7 +43,7 @@ export default function Component() {
                 playerName,
                 jerseyNumber,
                 position,
-                playerImage: playerImageURL
+                // playerImage: playerImageURL
                 // : formData.get('imageURL'),
 
             }, {

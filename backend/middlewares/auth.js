@@ -11,10 +11,7 @@ exports.verifyAdmin = async (req, res, next) => {
       const decodedToken = jwt.verify(token, tokenKey)
       if (decodedToken) {
         if ((decodedToken.role === 'admin')) {
-          await User.findOne({ _id: decodedToken.userId })
-          req.auth = {
-            id: decodedToken.userId
-          }
+          // console.log(decodedToken.role)
           next()
         } else {
           return res.status(400).json({ message: 'Unauthorized' })
